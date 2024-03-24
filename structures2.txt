@@ -1,0 +1,75 @@
+// structures2.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
+
+#include <stdio.h>
+typedef struct item_rec {
+    int item_id;
+    char item_name[31];
+    int qoh;
+    float rate;
+
+}ITEM;
+
+
+int main()
+{
+    ITEM items[5] = {
+        {1,"Shirts",10,1.11},
+        {2,"Pants",20,2.22},
+        {3,"Dress",30,3.33},
+        {4,"Jackets",40,4.44},
+        {5,"Caps",50,5.55}
+    };
+    int sellQty;
+    char choice;
+    do {
+        int itemId;
+        printf("Enter Item ID:");
+        scanf_s("%d", &itemId);
+        int found = 0;
+        for (int i = 0; i < 5; i++) {
+            if (items[i].item_id == itemId) {
+                found = 1;
+                printf("Input Sell Qty:");
+                scanf_s("%d", &sellQty);
+                if (sellQty > items[i].qoh) {
+                    printf("Error :Cannot sell more than QOH \n");
+                }
+                else {
+                    printf("Item id:%d\n", items[i].item_id);
+                    printf("Sell Qty:%d\n", sellQty);
+                    printf("QOH:%d\n", items[i].qoh);
+                    printf("Rate:%f\n", items[i].rate);
+                    float totalCost = sellQty * items[i].rate;
+                    printf("Total Cost:%f\n", totalCost);
+                    items[i].qoh -= sellQty;
+                }
+                break;
+            }
+        }
+        if (!found) {
+            printf("Error:Item ID not found\n");
+
+        }
+        printf("Do you want to continue?(Y/N):");
+        scanf_s("%c", &choice);
+
+    } while (choice == 'Y' || choice == 'y');
+    printf("\nArray of Items after selling:\n");
+    printf("Item ID Item Name QOH Rate\n");
+    for (int i = 0; i < 5; i++) {
+        printf("%d %s %d %f\n", items[i].item_id, items[i].item_name, items[i].qoh, items[i].rate);
+    }
+    return 0;
+}
+
+// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
+// Debug program: F5 or Debug > Start Debugging menu
+
+// Tips for Getting Started: 
+//   1. Use the Solution Explorer window to add/manage files
+//   2. Use the Team Explorer window to connect to source control
+//   3. Use the Output window to see build output and other messages
+//   4. Use the Error List window to view errors
+//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
+//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file

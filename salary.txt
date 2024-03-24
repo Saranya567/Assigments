@@ -1,0 +1,68 @@
+// salary.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
+
+#include <stdio.h>
+
+int main()
+{
+	float basic_salary, hra, da, gross_salary;
+	int grade;
+
+	printf("Enter basic salary:");
+	scanf_s("%f", &basic_salary);
+
+	printf("Enter Grade(1,2,3):");
+	scanf("%d", &grade);
+
+	if (grade == 1)
+	{
+		hra = 0.05 * basic_salary;
+		da = 0.07 * basic_salary;
+		if (hra > 2000)hra = 2000;
+		if (da > 3000)da = 3000;
+	}
+	else if (grade == 2)
+	{
+		hra = 0.10 * basic_salary;
+		da = 0.08 * basic_salary;
+		if (hra > 3000)hra = 3000;
+		if (da > 3500)da = 3500;
+	}
+	else if (grade == 3)
+	{
+		hra = 0.15 * basic_salary;
+		da = 0.10 * basic_salary;
+		if (hra > 4000)hra = 4000;
+		if (da > 4000)da = 4000;
+	}
+	else if (grade == 4)
+	{
+		hra = 0.20 * basic_salary;
+		da = 0.15 * basic_salary;
+		if (hra > 5000)hra = 5000;
+		if (da > 5000)da = 5000;
+	}
+	else
+	{
+		printf("invalid grade entered");
+		return 1;
+	}
+	gross_salary = basic_salary + hra + da;
+	printf("\nBasic salary: %f", basic_salary);
+	printf("Grade: %d\n", grade);
+	printf("HRA: %f\n", hra);
+	printf("DA: %f\n", da);
+	printf("Gross Salary: %f\n", gross_salary);
+	return 0;
+}
+
+// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
+// Debug program: F5 or Debug > Start Debugging menu
+
+// Tips for Getting Started: 
+//   1. Use the Solution Explorer window to add/manage files
+//   2. Use the Team Explorer window to connect to source control
+//   3. Use the Output window to see build output and other messages
+//   4. Use the Error List window to view errors
+//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
+//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file

@@ -1,0 +1,39 @@
+// insertionsort.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
+
+#include <iostream>
+void insertionsort(double arr[], int n)
+{
+
+    for (int i = 1; i < n; i++) {
+        double key = arr[i];
+        int j = i - 1;
+        while (j >= 0 && arr[j] < key) {
+            arr[j + 1] = arr[j];
+            j = j - 1;
+        }
+        arr[j + 1] = key;
+    }
+}
+int main()
+{
+    double arr[10] = { 8.3,1.1,1.3,5.9,3.8,2.5,3.3,3.4,5.9,7.8 };
+    int n = sizeof(arr) / sizeof(arr[0]);
+    insertionsort(arr, n);
+    printf("Sorted array in descending order:\n");
+    for (int i = 0; i < n; i++) {
+        printf("%lf", arr[i]);
+    }
+    return 0;
+}
+
+// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
+// Debug program: F5 or Debug > Start Debugging menu
+
+// Tips for Getting Started: 
+//   1. Use the Solution Explorer window to add/manage files
+//   2. Use the Team Explorer window to connect to source control
+//   3. Use the Output window to see build output and other messages
+//   4. Use the Error List window to view errors
+//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
+//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file

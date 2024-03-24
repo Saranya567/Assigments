@@ -1,0 +1,91 @@
+// mergesort.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
+
+#include <stdio.h>
+#include<stdlib.h>
+void merge(double arr[], int l, int m, int r) {
+    int i, j, k;
+    int n1 = m - l + 1;
+    int n2 = r - m;
+    double* L = (double*)malloc(n1 * sizeof(double));
+    double* R = (double*)malloc(n2 * sizeof(double));
+    for (i = 0; i < n1; i++)
+        L[i] = arr[l + i];
+    for (j = 0; j < n2; j++)
+        R[j] = arr[m + 1 + j];
+    i = 0;
+    j = 0;
+    k = l;
+    while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) {
+            arr[k] = L[i];
+            i++;
+        }
+        else {
+            arr[k] = R[j];
+            j++;
+        }
+        k++;
+    }
+    while (i < n1) {
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
+    while (j < n2) {
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
+}
+void mergesort(double arr[], int l, int r) {
+    if (l < r) {
+        int m = l + (r - l) / 2;
+        mergesort(arr, l, m);
+        mergesort(arr, m + 1, r);
+        merge(arr, l, m, r);
+    }
+}
+int binarysearch(double arr[], int l, int r, double x) {
+    while (l <= r) {
+        int m = l + (r - l) / 2;
+        if (arr[m] == x)
+            return m;
+        if (arr[m] < x)
+            l = m + 1;
+        else
+            r = m - 1;
+    }
+    return -1;
+}
+int main()
+{
+    double arr[10] = { 8.9,6.8,1.1,1.2,5.6,7.9,3.3,3.2,7.4,2.9 };
+    int n = sizeof(arr) / sizeof(arr[0]);
+    mergesort(arr, 0, n - 1);
+    printf("Sorted array in ascending order;\n");
+    for (int i = 0; i < n; i++) {
+        printf("%lf", arr[i]);
+    }
+    printf("\n");
+    double search_val;
+    printf("Enter value to search:");
+    scanf_s("%lf", &search_val);
+    int result = binarysearch(arr, 0, n - 1, search_val);
+    if (result != -1)
+        printf("value %lf found at index %d\n", search_val, result);
+    else
+        printf("cannot find value %lf.\n", search_val);
+    return 0;
+}
+
+// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
+// Debug program: F5 or Debug > Start Debugging menu
+
+// Tips for Getting Started: 
+//   1. Use the Solution Explorer window to add/manage files
+//   2. Use the Team Explorer window to connect to source control
+//   3. Use the Output window to see build output and other messages
+//   4. Use the Error List window to view errors
+//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
+//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
